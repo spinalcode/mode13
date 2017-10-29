@@ -105,7 +105,6 @@ void make_plasma(void){
 	for(i=0; i<game.display.width*game.display.height; i++)	{
 		buff[i]=0;
 	}
-	srand(1890462285);
 	Dot(0, 0, RandMinMax(0,255) + 1);
 	Dot(game.display.width-1, 0, RandMinMax(0,255) + 1);
 	Dot(game.display.width-1, game.display.height-1, RandMinMax(0,255) + 1);
@@ -136,44 +135,28 @@ void setup(){
     game.display.height = 88;
     game.setFrameRate(60);
     game.display.persistence=1;
-//    game.display.setColorDepth(4);
-//    game.display.load565Palette(sprite_pal);
-//    game.display.bgcolor = 0;
-//    game.display.invisiblecolor = -16;
-
-        for(int y=0; y<88; y++){
-            for(int x=0; x<110; x++){
-                game.display.screenbuffer[x+110*y]=0;
-            }
-        }
 
 }
 
 int main(){
     setup();
 
+	srand(game.getTime());
 	make_pal();
     make_plasma();
 
 //    ReadBMP("test.bmp");
 
-
     for(int y=0; y<game.display.height; y++){
         for(int x=0; x<game.display.width; x++){
-            game.display.screenbuffer[x*game.display.height+y]=buff[x+game.display.width*y];
+            game.display.screenbuffer[x+game.display.width*y]=buff[x+game.display.width*y];
         }
     }
 
     while (game.isRunning()) {
-        //game.display.rotatePalette(1);
-        char temp = game.display.palette[0];
-        for(char t=0; t<255; t++){
-            game.display.palette[t] = game.display.palette[t+1];
+        if(game.update()){
+            game.display.rotatePalette(2);
         }
-        game.display.palette[255]=temp;
-
-        //print(0, 80, "Hello World",0,-16);
-        game.display.update();
     }
 
     return 1;
