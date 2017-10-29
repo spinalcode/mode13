@@ -199,8 +199,6 @@
     #define POK_STRETCH 0
     #define POK_FPS 60
     #define POK_COLORDEPTH 8
-    #define PALETTE_SIZE 16
-
 #endif
 
 /** SCREEN MODES TABLE -- DO NOT CHANGE THESE **/

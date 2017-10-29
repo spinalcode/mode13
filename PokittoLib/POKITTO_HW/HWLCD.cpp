@@ -372,28 +372,28 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
 
 void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr) {
 
-    write_command(0x03); // Entry mode... lets try if this affects the direction
-    write_data(0x1038); // horizontal
+    //write_command(0x03); // Entry mode... lets try if this affects the direction
+    //write_data(0x1038); // horizontal
 
 	write_command(0x20); write_data(0); // x
 	write_command(0x21); write_data(0); // y
 	write_command(0x22); // pixel data mode
 
     int t=0;
-    for(int y=0; y<88; y++){
-        for(int x=0; x<110; x++){
+    for(int y=0; y<110; y++){
+        for(int x=0; x<88; x++){
             write_data(paletteptr[scrbuf[t]]);
             write_data(paletteptr[scrbuf[t++]]);
         }
-        t = 110*y;
-        for(int x=0; x<110; x++){
+        t = 88*y;
+        for(int x=0; x<88; x++){
             write_data(paletteptr[scrbuf[t]]);
             write_data(paletteptr[scrbuf[t++]]);
         }
     }
 
-    write_command(0x03); // Entry mode... lets try if this affects the direction
-    write_data(0x1030); // originally 0x1030 1000000110000 BGR,ID1,ID0
+    //write_command(0x03); // Entry mode... lets try if this affects the direction
+    //write_data(0x1030); // originally 0x1030 1000000110000 BGR,ID1,ID0
 
 }
 

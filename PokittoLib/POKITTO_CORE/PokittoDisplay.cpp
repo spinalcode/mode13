@@ -143,7 +143,7 @@ uint8_t Display::bpp = POK_COLORDEPTH;
 #elif (POK_SCREENMODE == MODE13)
     uint8_t Display::width = 110;
     uint8_t Display::height = 88;
-    uint8_t Display::screenbuffer[100*88]; // 8bit 110x88
+    uint8_t Display::screenbuffer[110*88]; // 8bit 110x88
 #else
     uint8_t Display::width = 84;
     uint8_t Display::height = 48;

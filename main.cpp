@@ -3,7 +3,6 @@
 
 Pokitto::Core game;
 
-
 void drawFont(int x1, int y1, int wide, int high, int tile, int transparentColor, const uint8_t *gfx, int palReplace = -1){
     uint16_t tileBuffer[(wide+1)*(high+1)];
 
@@ -14,10 +13,10 @@ void drawFont(int x1, int y1, int wide, int high, int tile, int transparentColor
     for(int y=0; y<high; y++){
         for(int x=0; x<quartWide; x++){
             pic = gfx[(tile*quartWide*high)+(x+quartWide*y)];
-            pix = (pic >> 6)&3; game.display.screenbuffer[(  x1+(x*4))*88+(y1+y)]=pix;
-            pix = (pic >> 4)&3; game.display.screenbuffer[(1+x1+(x*4))*88+(y1+y)]=pix;
-            pix = (pic >> 2)&3; game.display.screenbuffer[(2+x1+(x*4))*88+(y1+y)]=pix;
-            pix = pic &3;       game.display.screenbuffer[(3+x1+(x*4))*88+(y1+y)]=pix;
+            pix = (pic >> 6)&3; if(pix != transparentColor) game.display.screenbuffer[(  x1+(x*4))*88+(y1+y)]=pix;
+            pix = (pic >> 4)&3; if(pix != transparentColor) game.display.screenbuffer[(1+x1+(x*4))*88+(y1+y)]=pix;
+            pix = (pic >> 2)&3; if(pix != transparentColor) game.display.screenbuffer[(2+x1+(x*4))*88+(y1+y)]=pix;
+            pix = pic &3;       if(pix != transparentColor) game.display.screenbuffer[(3+x1+(x*4))*88+(y1+y)]=pix;
         }
     }
 }
@@ -51,7 +50,7 @@ unsigned char* ReadBMP(char* filename){
         fread(game.display.screenbuffer, 1, 110*88, testRead);
 		fclose(testRead);
 	}else{
-        print(0, 0, "No Open File.",0,-16);
+        print(0, 0, "No Open File.",0,127);
 	}
 }
 
@@ -60,13 +59,11 @@ unsigned char* ReadBMP(char* filename){
 
 
 unsigned short pal[256];
-char buff[110*88];
 int PntClr(int x, int y){
-	return buff[x+game.display.width*y];
+	return game.display.screenbuffer[x*game.display.height+y];
 }
 void Dot (int x, int y, int c){
-    // create a buffer for the screen image
-	buff[x+game.display.width*y]=c;
+	game.display.screenbuffer[x*game.display.height+y]=c;
 }
 int RandMinMax(int min, int max){
     return rand() % max + min;
@@ -103,7 +100,7 @@ void SubDivide (int x1, int y1, int x2, int y2){
 void make_plasma(void){
 	int i=0;
 	for(i=0; i<game.display.width*game.display.height; i++)	{
-		buff[i]=0;
+		game.display.screenbuffer[i]=0;
 	}
 	Dot(0, 0, RandMinMax(0,255) + 1);
 	Dot(game.display.width-1, 0, RandMinMax(0,255) + 1);
@@ -124,18 +121,11 @@ void make_pal(void){
 
 
 
-
-
-
-
-
 void setup(){
     game.begin();
     game.display.width = 110; // half size
     game.display.height = 88;
-    game.setFrameRate(60);
     game.display.persistence=1;
-
 }
 
 int main(){
@@ -145,17 +135,10 @@ int main(){
 	make_pal();
     make_plasma();
 
-//    ReadBMP("test.bmp");
-
-    for(int y=0; y<game.display.height; y++){
-        for(int x=0; x<game.display.width; x++){
-            game.display.screenbuffer[x+game.display.width*y]=buff[x+game.display.width*y];
-        }
-    }
-
     while (game.isRunning()) {
         if(game.update()){
-            game.display.rotatePalette(2);
+            print(0, 0, "Mode13 Test",0,-16);
+            game.display.rotatePalette(1);
         }
     }
 
