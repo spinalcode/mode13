@@ -633,233 +633,137 @@ void Pokitto::lcdRefreshGB(uint8_t * scrbuf, uint16_t* paletteptr) {
 uint16_t x,y;
 uint16_t scanline[48];
 uint8_t * d;
-
-#if POK_STRETCH
-//uint16_t xptr = 8;
-#else
-//xptr = 26;
-#endif
-
-write_command(0x20);  // Horizontal DRAM Address
-write_data(0);  // 0
-write_command(0x21);  // Vertical DRAM Address
-write_data(0);
-write_command(0x22); // write data to DRAM
-CLR_CS_SET_CD_RD_WR;
-
-/** draw border **/
-    for (int s=0;s<5*176;) {
-            setup_data_16(COLOR_BLACK);CLR_WR;SET_WR;s++;
-    }
-
-for(x=0;x<84;x++)
-  {
-
+    //setWindow(0, 0, 143, 167);
+setWindow(40, 26, 96+40-1, 193);
+write_command(0x22);
+for(x=0;x<84;x++){
         d = scrbuf + x;// point to beginning of line in data
 
-        /** find colours in one scanline **/
-        uint8_t s=0;
-        for(y=0;y<6;y++)
-            {
-            uint8_t t = *d;
-            #if POK_COLORDEPTH > 1
-            uint8_t t2 = *(d+504);
-            #endif
-            #if POK_COLORDEPTH > 2
-            uint8_t t3 = *(d+504+504);
-            #endif
-            #if POK_COLORDEPTH > 3
-            uint8_t t4 = *(d+504+504+504);
-            #endif
-            uint8_t paletteindex = 0;
+    /** find colours in one scanline **/
+    uint8_t s=0;
+    for(y=0;y<6;y++){
 
-            /** bit 1 **/
-            #if POK_COLORDEPTH == 1
-            paletteindex = (t & 0x1);
-            #elif POK_COLORDEPTH == 2
-            paletteindex = ((t & 0x1)) | ((t2 & 0x01)<<1);
-            #elif POK_COLORDEPTH == 3
-            paletteindex = (t & 0x1) | ((t2 & 0x1)<<1) | ((t3 & 0x1)<<2);
-            #elif POK_COLORDEPTH == 4
-            paletteindex = (t & 0x1) | ((t2 & 0x1)<<1) | ((t3 & 0x1)<<2) | ((t4 & 0x1)<<3);
-            #endif
-            scanline[s++] = paletteptr[paletteindex];
-
-            /** bit 2 **/
-            #if POK_COLORDEPTH == 1
-            paletteindex = (t & 0x2)>>1;
-            #elif POK_COLORDEPTH == 2
-            paletteindex = ((t & 0x2)>>1) | ((t2 & 0x02));
-            #elif POK_COLORDEPTH == 3
-            paletteindex = ((t & 0x2)>>1) | ((t2 & 0x2)) | ((t3 & 0x2)<<1);
-            #elif POK_COLORDEPTH == 4
-            paletteindex = ((t & 0x2)>>1) | ((t2 & 0x2)) | ((t3 & 0x2)<<1) | ((t4 & 0x2)<<2);
-            #endif
-            scanline[s++] = paletteptr[paletteindex];
-
-            /** bit 3 **/
-            #if POK_COLORDEPTH == 1
-            paletteindex = (t & 0x4)>>2;
-            #elif POK_COLORDEPTH == 2
-            paletteindex = ((t & 4)>>2) | ((t2 & 0x04)>>1);
-            #elif POK_COLORDEPTH == 3
-            paletteindex = ((t & 0x4)>>2) | ((t2 & 0x4)>>1) | (t3 & 0x4);
-            #elif POK_COLORDEPTH == 4
-            paletteindex = ((t & 0x4)>>2) | ((t2 & 0x4)>>1) | (t3 & 0x4) | ((t4 & 0x4)<<1);
-            #endif
-            scanline[s++] = paletteptr[paletteindex];
-
-            /** bit 4 **/
-            #if POK_COLORDEPTH == 1
-            paletteindex = (t & 0x8)>>3;
-            #elif POK_COLORDEPTH == 2
-            paletteindex = ((t & 0x8)>>3) | ((t2 & 0x08)>>2);
-            #elif POK_COLORDEPTH == 3
-            paletteindex = ((t & 0x8)>>3) | ((t2 & 0x8)>>2) | ((t3 & 0x8)>>1);
-            #elif POK_COLORDEPTH == 4
-            paletteindex = ((t & 0x8)>>3) | ((t2 & 0x8)>>2) | ((t3 & 0x8)>>1) | (t4 & 0x8);
-            #endif
-            scanline[s++] = paletteptr[paletteindex];
-
-            /** bit 5 **/
-            #if POK_COLORDEPTH == 1
-            paletteindex = (t & 0x10)>>4;
-            #elif POK_COLORDEPTH == 2
-            paletteindex = ((t & 0x10)>>4) | ((t2 & 0x10)>>3);
-            #elif POK_COLORDEPTH == 3
-            paletteindex = ((t & 0x10)>>4) | ((t2 & 0x10)>>3) | ((t3 & 0x10)>>2);
-            #elif POK_COLORDEPTH == 4
-            paletteindex = ((t & 0x10)>>4) | ((t2 & 0x10)>>3) | ((t3 & 0x10)>>2) | ((t4 & 0x10)>>1);
-            #endif
-            scanline[s++] = paletteptr[paletteindex];
-
-            /** bit 6 **/
-            #if POK_COLORDEPTH == 1
-            paletteindex = (t & 0x20)>>5;
-            #elif POK_COLORDEPTH == 2
-            paletteindex = ((t & 0x20)>>5) | ((t2 & 0x20)>>4);
-            #elif POK_COLORDEPTH == 3
-            paletteindex = ((t & 0x20)>>5) | ((t2 & 0x20)>>4) | ((t3 & 0x20)>>3);
-            #elif POK_COLORDEPTH == 4
-            paletteindex = ((t & 0x20)>>5) | ((t2 & 0x20)>>4) | ((t3 & 0x20)>>3) | ((t4 & 0x20)>>2);
-            #endif
-            scanline[s++] = paletteptr[paletteindex];
-
-            /** bit 7 **/
-            #if POK_COLORDEPTH == 1
-            paletteindex = (t & 0x40)>>6;
-            #elif POK_COLORDEPTH == 2
-            paletteindex = ((t & 0x40)>>6) | ((t2 & 0x40)>>5);
-            #elif POK_COLORDEPTH == 3
-            paletteindex = ((t & 0x40)>>6) | ((t2 & 0x40)>>5) | ((t3 & 0x40)>>4) ;
-            #elif POK_COLORDEPTH == 4
-            paletteindex = ((t & 0x40)>>6) | ((t2 & 0x40)>>5) | ((t3 & 0x40)>>4) | ((t4 & 0x40)>>3);
-            #endif
-            scanline[s++] = paletteptr[paletteindex];
-
-            /** bit 8 **/
-            #if POK_COLORDEPTH == 1
-            paletteindex = (t & 0x80)>>7;
-            #elif POK_COLORDEPTH == 2
-            paletteindex = ((t & 0x80)>>7) | ((t2 & 0x80)>>6);
-            #elif POK_COLORDEPTH == 3
-            paletteindex = ((t & 0x80)>>7) | ((t2 & 0x80)>>6) | ((t3 & 0x80)>>5);
-            #elif POK_COLORDEPTH == 4
-            paletteindex = ((t & 0x80)>>7) | ((t2 & 0x80)>>6) | ((t3 & 0x80)>>5) | ((t4 & 0x80)>>4);
-            #endif
-            scanline[s++] = paletteptr[paletteindex];
-
-            d+=84; // jump to byte directly below
-            }
-
-
-        /*write_command(0x20);  // Horizontal DRAM Address
-        write_data(0x10);  // 0
-        write_command(0x21);  // Vertical DRAM Address
-        write_data(xptr++);
-        write_command(0x22); // write data to DRAM
-        CLR_CS_SET_CD_RD_WR;*/
-        /** draw border **/
-        setup_data_16(COLOR_BLACK);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;        CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-
-        s=0;
-
-        /** draw scanlines **/
-        for (s=0;s<48;) {
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-        }
-        /** draw border **/
-        setup_data_16(COLOR_BLACK);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;        CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-
-
-        /*write_command(0x20);  // Horizontal DRAM Address
-        write_data(0x10);  // 0
-        write_command(0x21);  // Vertical DRAM Address
-        write_data(xptr++);
-        write_command(0x22); // write data to DRAM
-        CLR_CS_SET_CD_RD_WR;*/
-        /** draw border **/
-        setup_data_16(COLOR_BLACK);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;        CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-
-        for (s=0;s<48;) {
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-        }
-
-        /** draw border **/
-        setup_data_16(COLOR_BLACK);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;        CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-
-
-        #if POK_STRETCH
-        //if (x>16 && x<68)
-        if (x&2)// && x&2)
-        {
-            /*write_command(0x20);  // Horizontal DRAM Address
-            write_data(0x10);  // 0
-            write_command(0x21);  // Vertical DRAM Address
-            write_data(xptr++);
-            write_command(0x22); // write data to DRAM
-            CLR_CS_SET_CD_RD_WR;*/
-            /** draw border **/
-        setup_data_16(COLOR_BLACK);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;        CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-
-
-            for (s=0;s<48;) {
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-            }
-
-            /** draw border **/
-        setup_data_16(COLOR_BLACK);CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;        CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;CLR_WR;SET_WR;
-
-        }
+        uint8_t t = *d;
+        #if POK_COLORDEPTH > 1
+        uint8_t t2 = *(d+504);
         #endif
-    }
-    /** draw border **/
-    for (int s=0;s<5*176;) {
-            setup_data_16(COLOR_BLACK);CLR_WR;SET_WR;s++;
-    }
-}
+        #if POK_COLORDEPTH > 2
+        uint8_t t3 = *(d+504+504);
+        #endif
+        #if POK_COLORDEPTH > 3
+        uint8_t t4 = *(d+504+504+504);
+        #endif
+        uint8_t paletteindex = 0;
 
+        /** bit 1 **/
+        #if POK_COLORDEPTH == 1
+        paletteindex = (t & 0x1);
+        #elif POK_COLORDEPTH == 2
+        paletteindex = ((t & 0x1)) | ((t2 & 0x01)<<1);
+        #elif POK_COLORDEPTH == 3
+        paletteindex = (t & 0x1) | ((t2 & 0x1)<<1) | ((t3 & 0x1)<<2);
+        #elif POK_COLORDEPTH == 4
+        paletteindex = (t & 0x1) | ((t2 & 0x1)<<1) | ((t3 & 0x1)<<2) | ((t4 & 0x1)<<3);
+        #endif
+        scanline[s++] = paletteptr[paletteindex];
+
+        /** bit 2 **/
+        #if POK_COLORDEPTH == 1
+        paletteindex = (t & 0x2)>>1;
+        #elif POK_COLORDEPTH == 2
+        paletteindex = ((t & 0x2)>>1) | ((t2 & 0x02));
+        #elif POK_COLORDEPTH == 3
+        paletteindex = ((t & 0x2)>>1) | ((t2 & 0x2)) | ((t3 & 0x2)<<1);
+        #elif POK_COLORDEPTH == 4
+        paletteindex = ((t & 0x2)>>1) | ((t2 & 0x2)) | ((t3 & 0x2)<<1) | ((t4 & 0x2)<<2);
+        #endif
+        scanline[s++] = paletteptr[paletteindex];
+
+        /** bit 3 **/
+        #if POK_COLORDEPTH == 1
+        paletteindex = (t & 0x4)>>2;
+        #elif POK_COLORDEPTH == 2
+        paletteindex = ((t & 4)>>2) | ((t2 & 0x04)>>1);
+        #elif POK_COLORDEPTH == 3
+        paletteindex = ((t & 0x4)>>2) | ((t2 & 0x4)>>1) | (t3 & 0x4);
+        #elif POK_COLORDEPTH == 4
+        paletteindex = ((t & 0x4)>>2) | ((t2 & 0x4)>>1) | (t3 & 0x4) | ((t4 & 0x4)<<1);
+        #endif
+        scanline[s++] = paletteptr[paletteindex];
+
+        /** bit 4 **/
+        #if POK_COLORDEPTH == 1
+        paletteindex = (t & 0x8)>>3;
+        #elif POK_COLORDEPTH == 2
+        paletteindex = ((t & 0x8)>>3) | ((t2 & 0x08)>>2);
+        #elif POK_COLORDEPTH == 3
+        paletteindex = ((t & 0x8)>>3) | ((t2 & 0x8)>>2) | ((t3 & 0x8)>>1);
+        #elif POK_COLORDEPTH == 4
+        paletteindex = ((t & 0x8)>>3) | ((t2 & 0x8)>>2) | ((t3 & 0x8)>>1) | (t4 & 0x8);
+        #endif
+        scanline[s++] = paletteptr[paletteindex];
+
+        /** bit 5 **/
+        #if POK_COLORDEPTH == 1
+        paletteindex = (t & 0x10)>>4;
+        #elif POK_COLORDEPTH == 2
+        paletteindex = ((t & 0x10)>>4) | ((t2 & 0x10)>>3);
+        #elif POK_COLORDEPTH == 3
+        paletteindex = ((t & 0x10)>>4) | ((t2 & 0x10)>>3) | ((t3 & 0x10)>>2);
+        #elif POK_COLORDEPTH == 4
+        paletteindex = ((t & 0x10)>>4) | ((t2 & 0x10)>>3) | ((t3 & 0x10)>>2) | ((t4 & 0x10)>>1);
+        #endif
+        scanline[s++] = paletteptr[paletteindex];
+
+        /** bit 6 **/
+        #if POK_COLORDEPTH == 1
+        paletteindex = (t & 0x20)>>5;
+        #elif POK_COLORDEPTH == 2
+        paletteindex = ((t & 0x20)>>5) | ((t2 & 0x20)>>4);
+        #elif POK_COLORDEPTH == 3
+        paletteindex = ((t & 0x20)>>5) | ((t2 & 0x20)>>4) | ((t3 & 0x20)>>3);
+        #elif POK_COLORDEPTH == 4
+        paletteindex = ((t & 0x20)>>5) | ((t2 & 0x20)>>4) | ((t3 & 0x20)>>3) | ((t4 & 0x20)>>2);
+        #endif
+        scanline[s++] = paletteptr[paletteindex];
+
+        /** bit 7 **/
+        #if POK_COLORDEPTH == 1
+        paletteindex = (t & 0x40)>>6;
+        #elif POK_COLORDEPTH == 2
+        paletteindex = ((t & 0x40)>>6) | ((t2 & 0x40)>>5);
+        #elif POK_COLORDEPTH == 3
+        paletteindex = ((t & 0x40)>>6) | ((t2 & 0x40)>>5) | ((t3 & 0x40)>>4) ;
+        #elif POK_COLORDEPTH == 4
+        paletteindex = ((t & 0x40)>>6) | ((t2 & 0x40)>>5) | ((t3 & 0x40)>>4) | ((t4 & 0x40)>>3);
+        #endif
+        scanline[s++] = paletteptr[paletteindex];
+
+        /** bit 8 **/
+        #if POK_COLORDEPTH == 1
+        paletteindex = (t & 0x80)>>7;
+        #elif POK_COLORDEPTH == 2
+        paletteindex = ((t & 0x80)>>7) | ((t2 & 0x80)>>6);
+        #elif POK_COLORDEPTH == 3
+        paletteindex = ((t & 0x80)>>7) | ((t2 & 0x80)>>6) | ((t3 & 0x80)>>5);
+        #elif POK_COLORDEPTH == 4
+        paletteindex = ((t & 0x80)>>7) | ((t2 & 0x80)>>6) | ((t3 & 0x80)>>5) | ((t4 & 0x80)>>4);
+        #endif
+        scanline[s++] = paletteptr[paletteindex];
+
+        d+=84; // jump to byte directly below
+        }
+
+    /** draw scanlines **/
+    for (s=0;s<48;) {
+        write_data(scanline[s]);write_data(scanline[s++]);
+    }
+    for (s=0;s<48;) {
+        write_data(scanline[s]);write_data(scanline[s++]);
+    }
+
+}
+}
 
 void Pokitto::lcdRefreshAB(uint8_t * scrbuf, uint16_t* paletteptr) {
 uint16_t x,y;
