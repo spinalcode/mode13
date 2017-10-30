@@ -137,7 +137,7 @@ int main(){
 
     while (game.isRunning()) {
         if(game.update()){
-            print(0, 0, "Mode13 Test",0,-16);
+            //print(0, 0, "Mode13 Test",0,-16);
             game.display.rotatePalette(1);
         }
     }

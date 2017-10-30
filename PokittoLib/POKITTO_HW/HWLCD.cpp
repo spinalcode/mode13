@@ -327,74 +327,78 @@ void Pokitto::lcdClear() {
     }
 }
 
-void Pokitto::lcdPixel(int16_t x, int16_t y, uint16_t color) {
-    if ((x < 0) || (x >= POK_LCD_W) || (y < 0) || (y >= POK_LCD_H))
-	return;
-	write_command(0x20);  // Horizontal DRAM Address
-    write_data(y);  // 0
-    write_command(0x21);  // Vertical DRAM Address
-    write_data(x);
-    write_command(0x22); // write data to DRAM
-    CLR_CS_SET_CD_RD_WR;
-    setup_data_16(color);
-    CLR_WR;SET_WR;
+void Pokitto::setWindow(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2) {
+	write_command(0x37); write_data(x1);
+	write_command(0x36); write_data(x2);
+	write_command(0x39); write_data(y1);
+	write_command(0x38); write_data(y2);
+	write_command(0x20); write_data(x1);
+	write_command(0x21); write_data(y1);
 }
 
-void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color) {
-    	int16_t temp;
-	if (x0>x1) {temp=x0;x0=x1;x1=temp;}
-	if (y0>y1) {temp=y0;y0=y1;y1=temp;}
+void Pokitto::lcdTile(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t* gfx){
+	int width=x1-x0;
+	int height=y1-y0;
 	if (x0 > POK_LCD_W) return;
 	if (y0 > POK_LCD_H) return;
-    if (x1 > POK_LCD_W) x1=POK_LCD_W;
-	if (y1 > POK_LCD_H) y1=POK_LCD_W;
 	if (x0 < 0) x0=0;
 	if (y0 < 0) y0=0;
 
-	int16_t x,y;
-    for (x=x0; x<=x1;x++) {
-        write_command(0x20);  // Horizontal DRAM Address (=y on pokitto screen)
-        write_data(y0);
-        write_command(0x21);  // Vertical DRAM Address (=x on pokitto screen)
-        write_data(x);
-        write_command(0x22); // write data to DRAM
+	setWindow(y0, x0, y1-1, x1-1);
+    write_command(0x22);
 
-        CLR_CS_SET_CD_RD_WR; // go to vram write mode
-
-
-        for (y=y0; y<y1;y++) {
-                setup_data_16(color); // setup the data (flat color = no change between pixels)
-                CLR_WR;SET_WR; //CLR_WR;SET_WR;//toggle writeline, pokitto screen writes a column up to down
-        }
+    for (int x=0; x<=width*height-1;x++) {
+        write_data(gfx[x]);
     }
+	setWindow(0, 0, 175, 219);
+}
+
+void Pokitto::lcdPixel(int16_t x, int16_t y, uint16_t color) {
+    if ((x < 0) || (x >= POK_LCD_W) || (y < 0) || (y >= POK_LCD_H))
+	return;
+	write_command(0x20); write_data(y);
+	write_command(0x21); write_data(x);
+    write_command(0x22); write_data(color);
+
+}
+
+void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color) {
+	if(x1<=x0)x1=x0+1;
+	if(y1<=y0)y1=y0+1;
+	setWindow(y0, x0, y1-1, x1-1);
+	write_command(0x22);
+	int width=x1-x0;
+	int height=y1-y0;
+    int i=width*height;
+	while (i--) {
+		write_data(color);
+	}
 }
 
 
 void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr) {
 
-    //write_command(0x03); // Entry mode... lets try if this affects the direction
-    //write_data(0x1038); // horizontal
-
-	write_command(0x20); write_data(0); // x
-	write_command(0x21); write_data(0); // y
-	write_command(0x22); // pixel data mode
+    int savet;
+    uint16_t wdata;
+    write_command(0x20); write_data(0); // x
+    write_command(0x21); write_data(0); // y
+    write_command(0x22); // pixel data mode
 
     int t=0;
-    for(int y=0; y<110; y++){
-        for(int x=0; x<88; x++){
-            write_data(paletteptr[scrbuf[t]]);
-            write_data(paletteptr[scrbuf[t++]]);
+    for(int y=0; y <110; y++){
+        savet = t;
+        for(int x=0; x < 88; x++){
+            wdata = paletteptr[scrbuf[t++]];
+            write_data(wdata);
+            write_data(wdata);
         }
-        t = 88*y;
-        for(int x=0; x<88; x++){
-            write_data(paletteptr[scrbuf[t]]);
-            write_data(paletteptr[scrbuf[t++]]);
+        t = savet;
+        for(int x=0; x < 88; x++){
+            wdata = paletteptr[scrbuf[t++]];
+            write_data(wdata);
+            write_data(wdata);
         }
     }
-
-    //write_command(0x03); // Entry mode... lets try if this affects the direction
-    //write_data(0x1030); // originally 0x1030 1000000110000 BGR,ID1,ID0
-
 }
 
 void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint16_t* paletteptr) {
