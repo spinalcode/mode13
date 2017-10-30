@@ -534,8 +534,13 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
     if (x&1) pixel = (pixel&0xF0)|(col);
     else pixel = (pixel&0x0F) | (col<<4);
     m_scrbuf[i] = pixel;
+    #elif POK_COLORDEPTH == 8
+    uint16_t i = y*width + x;
+    m_scrbuf[i] = col;
     #endif // POK_COLORDEPTH
     #endif // POK_GAMEBUINO_SUPPORT
+
+
 }
 
 void Display::drawPixel(int16_t x,int16_t y) {
@@ -601,8 +606,12 @@ void Display::drawPixel(int16_t x,int16_t y) {
             if (x&1) pixel = (pixel&0xF0)|(color);
             else pixel = (pixel&0x0F) | (color<<4);
             m_scrbuf[i] = pixel;
+    #elif POK_COLORDEPTH == 8
+    uint16_t i = y*width + x;
+    m_scrbuf[i] = color;
     #endif // POK_COLORDEPTH
     #endif // POK_GAMEBUINO_SUPPORT
+
 }
 
 uint8_t Display::getPixel(int16_t x,int16_t y) {
@@ -633,6 +642,12 @@ uint8_t Display::getPixel(int16_t x,int16_t y) {
     else return pixel>>4;
     #endif // POK_COLORDEPTH
     #endif // POK_GAMEBUINO_SUPPORT
+
+    #if POK_COLORDEPTH == 8
+    uint16_t i = y*width + x;
+    return m_scrbuf[i];
+    #endif // POK_COLORDEPTH
+
 }
 
 void Display::drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {

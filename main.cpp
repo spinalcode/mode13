@@ -3,6 +3,56 @@
 
 Pokitto::Core game;
 
+/**************************************************************************/
+#define HELD 0
+#define NEW 1
+#define RELEASE 2
+byte CompletePad, ExPad, TempPad, myPad;
+bool _A[3], _B[3], _C[3], _Up[3], _Down[3], _Left[3], _Right[3];
+
+DigitalIn _aPin(P1_9);
+DigitalIn _bPin(P1_4);
+DigitalIn _cPin(P1_10);
+DigitalIn _upPin(P1_13);
+DigitalIn _downPin(P1_3);
+DigitalIn _leftPin(P1_25);
+DigitalIn _rightPin(P1_7);
+
+void UPDATEPAD(int pad, int var) {
+  _C[pad] = (var >> 1)&1;
+  _B[pad] = (var >> 2)&1;
+  _A[pad] = (var >> 3)&1;
+  _Down[pad] = (var >> 4)&1;
+  _Left[pad] = (var >> 5)&1;
+  _Right[pad] = (var >> 6)&1;
+  _Up[pad] = (var >> 7)&1;
+}
+
+void UpdatePad(int joy_code){
+  ExPad = CompletePad;
+  CompletePad = joy_code;
+  UPDATEPAD(HELD, CompletePad); // held
+  UPDATEPAD(RELEASE, (ExPad & (~CompletePad))); // released
+  UPDATEPAD(NEW, (CompletePad & (~ExPad))); // newpress
+}
+
+byte updateButtons(byte var){
+   var = 0;
+   if (_cPin) var |= (1<<1);
+   if (_bPin) var |= (1<<2);
+   if (_aPin) var |= (1<<3); // P1_9 = A
+   if (_downPin) var |= (1<<4);
+   if (_leftPin) var |= (1<<5);
+   if (_rightPin) var |= (1<<6);
+   if (_upPin) var |= (1<<7);
+
+   return var;
+}
+
+/**************************************************************************/
+
+
+
 void drawFont(int x1, int y1, int wide, int high, int tile, int transparentColor, const uint8_t *gfx, int palReplace = -1){
     uint16_t tileBuffer[(wide+1)*(high+1)];
 
@@ -134,11 +184,17 @@ int main(){
 	srand(game.getTime());
 	make_pal();
     make_plasma();
-
+    char col=0;
     while (game.isRunning()) {
         if(game.update()){
-            //print(0, 0, "Mode13 Test",0,-16);
+            myPad = updateButtons(myPad);
+            UpdatePad(myPad);
+
+            if(_A[NEW]){make_plasma();}
+            //print(0, 0, "Mode13 Test",0,col++);
+            game.display.print("Hello World!");
             game.display.rotatePalette(1);
+        //    game.display.update();
         }
     }
 

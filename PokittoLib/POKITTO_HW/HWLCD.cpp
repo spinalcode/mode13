@@ -98,13 +98,13 @@ inline void write_command_16(uint16_t data)
 /**************************************************************************/
 inline void write_data_16(uint16_t data)
 {
-   CLR_CS;
+   //CLR_CS;
    SET_CD;
    SET_RD;
    setup_data_16(data);
    CLR_WR;
    SET_WR;
-   SET_CS;
+   //SET_CS;
 }
 
 /**************************************************************************/
@@ -387,16 +387,26 @@ void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr) {
     int t=0;
     for(int y=0; y <110; y++){
         savet = t;
-        for(int x=0; x < 88; x++){
-            wdata = paletteptr[scrbuf[t++]];
-            write_data(wdata);
-            write_data(wdata);
+        for(int x=0; x < 87; x+=8){
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
         }
         t = savet;
-        for(int x=0; x < 88; x++){
-            wdata = paletteptr[scrbuf[t++]];
-            write_data(wdata);
-            write_data(wdata);
+        for(int x=0; x < 87; x+=8){
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
         }
     }
 }
