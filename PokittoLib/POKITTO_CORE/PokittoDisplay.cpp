@@ -494,6 +494,8 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
     if (col==invisiblecolor) return; // do not draw transparent pixels
     if ((uint16_t)x >= width || (uint16_t)y >= height) return;
     col &= (PALETTE_SIZE-1);
+
+
     #if POK_GAMEBUINO_SUPPORT >0
 
 	uint8_t c = col;
@@ -535,8 +537,7 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
     else pixel = (pixel&0x0F) | (col<<4);
     m_scrbuf[i] = pixel;
     #elif POK_COLORDEPTH == 8
-    uint16_t i = y*width + x;
-    m_scrbuf[i] = col;
+    m_scrbuf[y*width + x] = col;
     #endif // POK_COLORDEPTH
     #endif // POK_GAMEBUINO_SUPPORT
 

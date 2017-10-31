@@ -108,7 +108,7 @@ extern void blitWord(uint16_t);
 #define CLR_CD { LPC_GPIO_PORT->CLR[LCD_CD_PORT] = 1 << LCD_CD_PIN; } // RS = (0); // Clear pin
 #define SET_CD { LPC_GPIO_PORT->SET[LCD_CD_PORT] = 1 << LCD_CD_PIN; }// RS = (1); // Set pin
 
-#define CLR_WR { LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN; __asm("nop");__asm("nop");}//WR = (0); // Clear pin
+#define CLR_WR { LPC_GPIO_PORT->CLR[LCD_WR_PORT] = 1 << LCD_WR_PIN; }//WR = (0); // Clear pin // __asm("nop");__asm("nop");
 #define SET_WR LPC_GPIO_PORT->SET[LCD_WR_PORT] = 1 << LCD_WR_PIN; //WR = (1); // Set pin
 
 #define CLR_RD LPC_GPIO_PORT->CLR[LCD_RD_PORT] = 1 << LCD_RD_PIN; //RD = (0); // Clear pin
