@@ -24,9 +24,9 @@
 					<Add option="-fomit-frame-pointer" />
 					<Add option="-fdata-sections" />
 					<Add option="-ffunction-sections" />
-					<Add option="-Os" />
 					<Add option="-g" />
 					<Add option="-funsigned-char" />
+					<Add option="-Os" />
 					<Add option="-Wno-unused-parameter" />
 					<Add option="-Wno-missing-field-initializers" />
 					<Add option="-fmessage-length=0" />
@@ -76,9 +76,9 @@
 					<Add option="-fomit-frame-pointer" />
 					<Add option="-fdata-sections" />
 					<Add option="-ffunction-sections" />
-					<Add option="-Os" />
 					<Add option="-g" />
 					<Add option="-funsigned-char" />
+					<Add option="-Os" />
 					<Add option="-Wno-unused-parameter" />
 					<Add option="-Wno-missing-field-initializers" />
 					<Add option="-fmessage-length=0" />

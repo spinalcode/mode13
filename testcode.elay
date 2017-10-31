@@ -8,7 +8,7 @@
 	</File>
 	<File name="main.cpp" open="1" top="1" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5494" topLine="165" />
+			<Cursor1 position="5706" topLine="168" />
 		</Cursor>
 	</File>
 	<File name="mbed_config.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -43,7 +43,7 @@
 	</File>
 	<File name="PokittoLib\POKITTO_CORE\PokittoDisplay.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="22605" topLine="580" />
+			<Cursor1 position="22597" topLine="594" />
 		</Cursor>
 	</File>
 	<File name="PokittoLib\POKITTO_CORE\PokittoDisplay.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -63,12 +63,12 @@
 	</File>
 	<File name="PokittoLib\POKITTO_HW\HWLCD.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="26723" topLine="732" />
+			<Cursor1 position="4722" topLine="135" />
 		</Cursor>
 	</File>
 	<File name="PokittoLib\POKITTO_HW\HWLCD.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1959" topLine="26" />
+			<Cursor1 position="4806" topLine="65" />
 		</Cursor>
 	</File>
 	<File name="PokittoLib\Pokitto_settings.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">

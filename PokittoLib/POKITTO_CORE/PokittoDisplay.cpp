@@ -495,6 +495,9 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
     if ((uint16_t)x >= width || (uint16_t)y >= height) return;
     col &= (PALETTE_SIZE-1);
 
+    #if POK_COLORDEPTH == 8
+        m_scrbuf[x*height+y] = col;
+    #endif
 
     #if POK_GAMEBUINO_SUPPORT >0
 
@@ -536,8 +539,6 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
     if (x&1) pixel = (pixel&0xF0)|(col);
     else pixel = (pixel&0x0F) | (col<<4);
     m_scrbuf[i] = pixel;
-    #elif POK_COLORDEPTH == 8
-    m_scrbuf[y*width + x] = col;
     #endif // POK_COLORDEPTH
     #endif // POK_GAMEBUINO_SUPPORT
 
@@ -546,6 +547,11 @@ void Display::drawPixel(int16_t x,int16_t y, uint8_t col) {
 
 void Display::drawPixel(int16_t x,int16_t y) {
     if ((uint16_t)x >= width || (uint16_t)y >= height) return;
+
+    #if POK_COLORDEPTH == 8
+        m_scrbuf[x*height+y] = color;
+    #endif
+
 
     #if POK_GAMEBUINO_SUPPORT > 0
 
@@ -607,9 +613,6 @@ void Display::drawPixel(int16_t x,int16_t y) {
             if (x&1) pixel = (pixel&0xF0)|(color);
             else pixel = (pixel&0x0F) | (color<<4);
             m_scrbuf[i] = pixel;
-    #elif POK_COLORDEPTH == 8
-    uint16_t i = y*width + x;
-    m_scrbuf[i] = color;
     #endif // POK_COLORDEPTH
     #endif // POK_GAMEBUINO_SUPPORT
 

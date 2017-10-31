@@ -185,17 +185,23 @@ int main(){
 	make_pal();
     make_plasma();
     char col=0;
+
+    game.display.drawRect(1,1,107,85);
+    game.display.drawLine(1,1,107,85);
+    game.display.drawCircle(55,44,20);
+    game.display.drawChar(8,8,'A',8);
+
     while (game.isRunning()) {
-        if(game.update()){
+        //if(game.update()){
             myPad = updateButtons(myPad);
             UpdatePad(myPad);
 
             if(_A[NEW]){make_plasma();}
             //print(0, 0, "Mode13 Test",0,col++);
             game.display.print("Hello World!");
-            game.display.rotatePalette(1);
-        //    game.display.update();
-        }
+            game.display.rotatePalette(16);
+            game.display.update();
+        //}
     }
 
     return 1;
