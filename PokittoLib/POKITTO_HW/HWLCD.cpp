@@ -168,10 +168,14 @@ void Pokitto::lcdInit() {
 
 
     write_command(0x08); // Display control 2
-    write_data(0x0808); // 100000001000 FP2,BP2
+    write_data(0x0408); // 10000001000 FP2,BP2
+
+    write_command(0x0B); // Frame Cycle Control
+    write_data(0x00); //
+
 
     write_command(0x0C); // RGB display interface
-    write_data(0x0000); // all off
+    write_data(0x000); // all off
 
     write_command(0x0F); // Frame marker position
     write_data(0x0001); // OSC_EN
@@ -261,7 +265,7 @@ void Pokitto::lcdInit() {
     write_data(0x0000);
 
     write_command(0x07);
-    write_data(0x1017);
+    write_data(0x1017); // 0x1017
     wait_ms(200);
     write_command(0x22);
 
@@ -291,6 +295,7 @@ void Pokitto::lcdWakeUp (void){
    write_data(0x0000);
    wait_ms(50);
    write_command(0x07);
+//   write_data(0x0117);
    write_data(0x0117);
    wait_ms(200);
   }

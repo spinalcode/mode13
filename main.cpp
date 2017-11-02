@@ -1,7 +1,14 @@
 #include "Pokitto.h"
 #include "gfx.h"
+#include "music.h"
 
 Pokitto::Core game;
+#define SOUND_PLAUNCH 0
+#define SOUND_ELAUNCH 1
+#define SOUND_DETONATE 2
+#define SOUND_SCORE 3
+#define SOUND_DEAD 4
+#define SOUND_LOSE 5
 
 /**************************************************************************/
 #define HELD 0
@@ -178,6 +185,32 @@ void setup(){
     game.display.persistence=1;
 }
 
+
+// Wave, pitch, duration, arpeggio step duration, arpeggio step size
+const int8_t sounds[][5] = {
+  { 0, 20, 5, 1, 1 }, //Player launch
+  { 0, 25, 5, 1, -1 }, //Enemy launch
+  { 1, 10, 5, 1, -1 }, //Detonating enemy missile
+  { 1, 10, 2, 0, 0 }, //Score pips
+  { 1, 2, 10, 1, -1 }, //A city dies
+  { 0, 20, 14, 3, -1 }, //Lose
+};
+
+void initSound(){
+  game.sound.command(CMD_VOLUME, 5, 0, 0);
+  game.sound.command(CMD_SLIDE, 0, 0, 0);
+}
+
+void playSound(uint8_t i){
+  game.sound.command(CMD_VOLUME, 5, 0, 0);
+  game.sound.command(CMD_SLIDE, 0, 0, 0);
+  game.sound.command(CMD_ARPEGGIO, sounds[i][3], sounds[i][4], 0);
+  game.sound.command(CMD_INSTRUMENT, sounds[i][0], 0, 0);
+  game.sound.playNote(sounds[i][1], sounds[i][2], 0);
+
+  //gb.sound.playNote(20, 5, 0);
+}
+
 int main(){
     setup();
 
@@ -190,15 +223,21 @@ int main(){
     game.display.drawLine(1,1,107,85);
     game.display.drawCircle(55,44,20);
     game.display.drawChar(8,8,'A',8);
+    game.display.print("Hello World!");
+
+        playSound(SOUND_PLAUNCH);
 
     while (game.isRunning()) {
         //if(game.update()){
             myPad = updateButtons(myPad);
             UpdatePad(myPad);
 
-            if(_A[NEW]){make_plasma();}
+            if(_A[NEW]){
+                playSound(SOUND_PLAUNCH);
+                make_plasma();
+            }
             //print(0, 0, "Mode13 Test",0,col++);
-            game.display.print("Hello World!");
+            //game.display.print("Hello World!");
             game.display.rotatePalette(16);
             game.display.update();
         //}

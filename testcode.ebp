@@ -117,6 +117,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mbed_config.h" />
+		<Unit filename="music.h" />
 		<Unit filename="My_settings.h" />
 		<Unit filename="PokittoLib\libpff\connect.h" />
 		<Unit filename="PokittoLib\libpff\diskio.h" />

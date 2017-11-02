@@ -4185,7 +4185,7 @@
 
 1509285510 c:\users\spinal\documents\github\mode13\pokittolib\libpff\connect.h
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisk.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisk.h
 	"diskio.h"
 	"pff.h"
 	"connect.h"
@@ -4489,13 +4489,13 @@
 1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\fonts\adventurer12x16.cpp
 	"PokittoFonts.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittofonts.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittofonts.h
 	"Pokitto_settings.h"
 
 1509354316 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_settings.h
 	"My_settings.h"
 
-1509279705 c:\users\spinal\documents\github\mode13\my_settings.h
+1509616768 c:\users\spinal\documents\github\mode13\my_settings.h
 
 1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\fonts\donut7x10.cpp
 	"PokittoFonts.h"
@@ -4548,7 +4548,7 @@
 1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\palettes\palaction.cpp
 	"PokittoPalettes.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittopalettes.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittopalettes.h
 	"Pokitto_settings.h"
 
 1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\palettes\palcga.cpp
@@ -4578,27 +4578,27 @@
 1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\palettes\palzxspec.cpp
 	"PokittoPalettes.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobacklight.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobacklight.cpp
 	"PokittoBacklight.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobacklight.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobacklight.h
 	<stdint.h>
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobattery.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobattery.cpp
 	"PokittoBattery.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobattery.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobattery.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
 	"PokittoGlobs.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\gbcompatibility.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\gbcompatibility.h
 	"binary.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\binary.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\binary.h
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoglobs.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoglobs.h
 	<stdint.h>
 	"SimLCD.h"
 	"SimSound.h"
@@ -4612,14 +4612,14 @@
 	"gpio_api.h"
 	"pinmap.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwsound.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwsound.h
 	"mbed.h"
 	"Pokitto_settings.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobuttons.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobuttons.cpp
 	"PokittoCore.h"
 
-1509299452 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittocore.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittocore.h
 	<stdint.h>
 	<math.h>
 	"pwmout_api.h"
@@ -4636,16 +4636,16 @@
 	"PokittoSound.h"
 	"PokittoFakeavr.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwbuttons.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwbuttons.h
 	"mbed.h"
 	"Pokitto_settings.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoconsole.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoconsole.h
 	"Pokitto_settings.h"
 	"PokittoButtons.h"
 	<stdint.h>
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobuttons.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobuttons.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4663,14 +4663,14 @@
 	<stdlib.h>
 	<string.h>
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittosound.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittosound.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
 	"PokittoFakeavr.h"
 	"PokittoGlobs.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittofakeavr.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittofakeavr.h
 	"PokittoItoa.h"
 	"binary.h"
 	<stdint.h>
@@ -4678,16 +4678,16 @@
 	<stdbool.h>
 	<stdbool.h>
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoitoa.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoitoa.h
 	<stdint.h>
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoconsole.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoconsole.cpp
 	"PokittoGlobs.h"
 	"PokittoConsole.h"
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittocore.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -4697,15 +4697,15 @@
 	<stdlib.h>
 	"iap.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittotimer.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittotimer.h
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittologos.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittologos.h
 	<stdint.h>
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\iap.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\iap.h
 	<stdint.h>
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisk.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisk.cpp
 	"Pokitto.h"
 
 1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto.h
@@ -4722,21 +4722,21 @@
 	"Synth.h"
 	"HWSound.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokitto_extport.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokitto_extport.h
 	"mbed.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokittoeeprom.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokittoeeprom.h
 	<stdint.h>
 	"iap.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth.h
 	"Synth_osc.h"
 	"Synth_song.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_osc.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_osc.h
 	"Pokitto.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_song.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_song.h
 
 1509440356 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
@@ -4749,15 +4749,15 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoitoa.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittoitoa.cpp
 	"PokittoItoa.h"
 	<string.h>
 	<stdint.h>
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittologos.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittologos.cpp
 	"PokittoLogos.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittopalette.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittopalette.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4766,7 +4766,7 @@
 	"HWLCD.h"
 	"SimLCD.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittosound.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittosound.cpp
 	"PokittoSound.h"
 	"Pokitto_settings.h"
 	"PokittoCore.h"
@@ -4775,17 +4775,17 @@
 	"SimSound.h"
 	"PokittoSimulator.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwbuttons.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwbuttons.cpp
 	"HWButtons.h"
 	"PokittoCore.h"
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1509357256 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwlcd.cpp
+1509531460 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwsound.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwsound.cpp
 	"mbed.h"
 	"HWSound.h"
 	"SoftwareI2C.h"
@@ -4794,58 +4794,58 @@
 	"PokittoGlobs.h"
 	"Synth.h"
 
-1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\softwarei2c.h
+1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\softwarei2c.h
 	"mbed.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\iap.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\iap.cpp
 	<stdio.h>
 	<stdint.h>
 	<iap.h>
 	"LPC11U6x.h"
 	"PokittoDisk.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokitto_extport.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokitto_extport.cpp
 	"Pokitto.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokittoclock.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokittoclock.cpp
 	"PokittoCore.h"
 	"pinmap.h"
 	"HWLCD.h"
 	"Pokitto_settings.h"
 	"wait_api.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokittohw.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokittohw.cpp
 	"PokittoCore.h"
 	"pinmap.h"
 	"HWLCD.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\softwarei2c.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\softwarei2c.cpp
 	"SoftwareI2C.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth.cpp
 	"Pokitto.h"
 	"Synth.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_envfuncs.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_envfuncs.cpp
 	"Synth.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_helpers.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_helpers.cpp
 	"Pokitto.h"
 	"Synth.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_mixfuncs.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_mixfuncs.cpp
 	"PokittoGlobs.h"
 	"Synth.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_oscfuncs.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_oscfuncs.cpp
 	"Synth.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_songfuncs.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_songfuncs.cpp
 	"PokittoDisk.h"
 	"Synth.h"
 	"FileIO.h"
 
-1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_wavefuncs.cpp
+1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_wavefuncs.cpp
 	"Synth.h"
 
 1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_xternals\arduino\delay.cpp
@@ -4876,9 +4876,12 @@
 1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_xternals\arduino\pins_arduino.h
 	"PokittoFakeavr.h"
 
-1509440123 source:c:\users\spinal\documents\github\mode13\main.cpp
+1509616881 source:c:\users\spinal\documents\github\mode13\main.cpp
 	"Pokitto.h"
 	"gfx.h"
+	"music.h"
 
 1509302115 c:\users\spinal\documents\github\mode13\gfx.h
+
+1509611231 c:\users\spinal\documents\github\mode13\music.h
 
