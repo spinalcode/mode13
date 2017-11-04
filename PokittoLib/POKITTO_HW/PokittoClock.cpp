@@ -43,6 +43,16 @@
 uint32_t pt_count=0;
 uint32_t* ptimer;
 
+
+Ticker ms_tick;
+void onMillisecondTicker(void)
+{
+    // this code will run every millisecond
+    pt_count+=1;
+}
+
+
+
 extern "C" {
 void SysTick_Handler(void) {
     //interrupt happens when systick has counted down to zero
@@ -59,7 +69,8 @@ using namespace Pokitto;
 uint32_t Core::refreshtime;
 
 void Core::initClock() {
-        // to get 1000 interrupts per second the reload value should be 48000
+   /*
+    // to get 1000 interrupts per second the reload value should be 48000
     #if PROJ_GAMEBOY > 0
     ptimer = &pt_count;
     SysTick->LOAD = 480000-1;
@@ -69,6 +80,9 @@ void Core::initClock() {
     SysTick->VAL  = 0;
     SysTick->CTRL  = 4 | 2 | 1; //CLKSOURCE=CPU clock | TICKINT | ENABLE
     pt_count = 0;
+*/
+    // turn on 1ms interrupt
+    ms_tick.attach_us(onMillisecondTicker,1000);
 }
 
 uint32_t Core::getTime() {

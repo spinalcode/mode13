@@ -230,7 +230,9 @@ int main(){
     int FPS = 0;
     int frameNumber=0;
     long tempTime=game.getTime();
-    int myFPS=60;
+    int myFPS=20;
+    game.setFrameRate(myFPS);
+    char tempText[10];
 
     while (game.isRunning()) {
         if(game.update()){
@@ -241,17 +243,23 @@ int main(){
             if(_Down[NEW]){ myFPS--; game.setFrameRate(myFPS); }
 
             game.display.setCursor(0,0);
-            game.display.setColor(col);
-            game.display.setInvisibleColor(0);
+            game.display.setColor(col--); if(col<0)col=255;
+            game.display.setInvisibleColor(-1);
             game.display.print(myFPS);
+            game.display.print(" ");
             game.display.setCursor(0,8);
             game.display.print(FPS);
-            game.display.print(" FPS ");
+            game.display.print(" ");
+            //game.display.setCursor(32,0);
+            //sprintf(tempText,"%d  ",game.timePerFrame);
+            //game.display.print(tempText);
+            //game.display.print(" ");
 
             frameNumber++;
             if(game.getTime()-tempTime>1000){
                 tempTime=game.getTime();
                 FPS=frameNumber-1;
+
                 frameNumber=0;
             }
 
@@ -259,10 +267,10 @@ int main(){
                 playSound(SOUND_PLAUNCH);
                 make_plasma(0,16,game.display.width-1,game.display.height-1);
             }
-            //print(0, 0, "Mode13 Test",0,col++);
-            //game.display.print("Hello World!");
-            game.display.rotatePalette(16);
-        //    game.display.update();
+
+            //game.display.rotatePalette(1);
+            //game.display.update();
+
         }
     }
 

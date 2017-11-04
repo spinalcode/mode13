@@ -234,7 +234,6 @@ public:
     static bool collideBitmapBitmap(int16_t x1, int16_t y1, const uint8_t* b1, int16_t x2, int16_t y2, const uint8_t* b2);
 
 private:
-    static uint8_t timePerFrame;
     static uint32_t nextFrameMillis;
     static void updatePopup();
     static const char* popupText;
@@ -245,6 +244,7 @@ private:
     static uint8_t startMenuTimer;
     static int updateLoader(uint32_t,uint32_t);
 public:
+    static uint8_t timePerFrame;
     static uint8_t volbar_visible;
     static void drawvolbar(int,int,int, bool);
     static void askLoader();

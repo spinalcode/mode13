@@ -237,7 +237,7 @@ void Display::setCursor(int16_t x,int16_t y) {
 
 void Display::update() {
 #if POK_SCREENMODE == MODE13
-    lcdRefreshMode13(m_scrbuf, paletteptr);
+    lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
 #endif
 
 #if POK_SCREENMODE == MODE_GAMEBOY
@@ -2133,7 +2133,7 @@ void Display::draw4BitColumn(int16_t x, int16_t y, uint8_t h, uint8_t* bitmap)
 
 void Display::lcdRefresh(unsigned char* scr) {
 #if POK_SCREENMODE == MODE13
-    lcdRefreshMode13(m_scrbuf, paletteptr);
+    lcdRefreshMode13(m_scrbuf, paletteptr, palOffset);
 #endif
 
 #if POK_SCREENMODE == MODE_GAMEBOY

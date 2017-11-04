@@ -787,8 +787,8 @@ bool Core::update(bool useDirectMode) {
         sound.updateStream();
     #endif
 
-	if ((((nextFrameMillis - getTime())) > timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
-		nextFrameMillis = getTime() + timePerFrame;
+	if ((nextFrameMillis - getTime() > timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
+		nextFrameMillis = getTime();
 		frameCount++;
 
 		frameEndMicros = 0;
