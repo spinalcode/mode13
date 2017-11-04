@@ -87,4 +87,4 @@
  PokittoLib\POKITTO_CORE/PokittoTimer.h \
  PokittoLib\POKITTO_HW/Pokitto_extport.h \
  PokittoLib\POKITTO_HW/PokittoEEPROM.h PokittoLib\POKITTO_HW/iap.h \
- PokittoLib\POKITTO_CORE/PokittoDisk.h gfx.h music.h
+ PokittoLib\POKITTO_CORE/PokittoDisk.h gfx.h
