@@ -64,7 +64,6 @@
 #define PALETTE_SIZE 256
 #define PI 3.141592741f
 
-
 // For GB compatibility
 #if PROJ_GAMEBUINO > 0
 extern void setup();

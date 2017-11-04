@@ -783,13 +783,12 @@ void Core::titleScreen(const char*  name, const uint8_t *logo){
 }
 
 bool Core::update(bool useDirectMode) {
-
 #if POK_STREAMING_MUSIC
         sound.updateStream();
     #endif
 
-	if (((getTime()-nextFrameMillis) >= timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
-		nextFrameMillis=getTime();
+	if ((((nextFrameMillis - getTime())) > timePerFrame) && frameEndMicros) { //if time to render a new frame is reached and the frame end has ran once
+		nextFrameMillis = getTime() + timePerFrame;
 		frameCount++;
 
 		frameEndMicros = 0;
@@ -797,26 +796,14 @@ bool Core::update(bool useDirectMode) {
 		buttons.update();
 		battery.update();
 
-			#if POK_ENABLE_SOUND > 0
-                sound.updateTrack();
-                sound.updatePattern();
-                sound.updateNote();
-			#endif
-			updatePopup();
-			displayBattery();
-
-			if(!useDirectMode)
-				display.update(); //send the buffer to the screen
-
 		return true;
 
 	} else {
-
 		if (!frameEndMicros) { //runs once at the end of the frame
 			#if POK_ENABLE_SOUND > 0
-                sound.updateTrack();
-                sound.updatePattern();
-                sound.updateNote();
+			sound.updateTrack();
+			sound.updatePattern();
+			sound.updateNote();
 			#endif
 			updatePopup();
 			displayBattery();
@@ -829,7 +816,6 @@ bool Core::update(bool useDirectMode) {
 		}
 		return false;
 	}
-
 }
 
 void Core::displayBattery(){

@@ -24,9 +24,9 @@
 					<Add option="-fomit-frame-pointer" />
 					<Add option="-fdata-sections" />
 					<Add option="-ffunction-sections" />
-					<Add option="-Os" />
 					<Add option="-g" />
 					<Add option="-funsigned-char" />
+					<Add option="-Os" />
 					<Add option="-Wno-unused-parameter" />
 					<Add option="-Wno-missing-field-initializers" />
 					<Add option="-fmessage-length=0" />
@@ -76,9 +76,9 @@
 					<Add option="-fomit-frame-pointer" />
 					<Add option="-fdata-sections" />
 					<Add option="-ffunction-sections" />
-					<Add option="-Os" />
 					<Add option="-g" />
 					<Add option="-funsigned-char" />
+					<Add option="-Os" />
 					<Add option="-Wno-unused-parameter" />
 					<Add option="-Wno-missing-field-initializers" />
 					<Add option="-fmessage-length=0" />
@@ -106,7 +106,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="arm-none-eabi-objcopy.exe -I ihex .\build\testcode.hex -O binary .\build\testcode.bin" />
-					<Add after=".\build\lpcrc .\build\testcode.bin copy .\build\testcode.bin .\build\firmware.bin" />
+					<Add after=".\build\lpcrc .\build\testcode.bin" />
 					<Mode before="0" />
 					<Mode after="1" />
 				</ExtraCommands>
@@ -117,6 +117,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mbed_config.h" />
+		<Unit filename="music.h" />
 		<Unit filename="My_settings.h" />
 		<Unit filename="PokittoLib\libpff\connect.h" />
 		<Unit filename="PokittoLib\libpff\diskio.h" />

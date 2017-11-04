@@ -1,7 +1,14 @@
 #include "Pokitto.h"
 #include "gfx.h"
+#include "music.h"
 
 Pokitto::Core game;
+#define SOUND_PLAUNCH 0
+#define SOUND_ELAUNCH 1
+#define SOUND_DETONATE 2
+#define SOUND_SCORE 3
+#define SOUND_DEAD 4
+#define SOUND_LOSE 5
 
 /**************************************************************************/
 #define HELD 0
@@ -181,49 +188,58 @@ void setup(){
     game.display.width = 110; // half size
     game.display.height = 88;
     game.display.persistence=1;
-    game.setFrameRate(60);
+}
+
+
+// Wave, pitch, duration, arpeggio step duration, arpeggio step size
+const int8_t sounds[][5] = {
+  { 0, 20, 5, 1, 1 }, //Player launch
+  { 0, 25, 5, 1, -1 }, //Enemy launch
+  { 1, 10, 5, 1, -1 }, //Detonating enemy missile
+  { 1, 10, 2, 0, 0 }, //Score pips
+  { 1, 2, 10, 1, -1 }, //A city dies
+  { 0, 20, 14, 3, -1 }, //Lose
+};
+
+void initSound(){
+  game.sound.command(CMD_VOLUME, 5, 0, 0);
+  game.sound.command(CMD_SLIDE, 0, 0, 0);
+}
+
+void playSound(uint8_t i){
+  game.sound.command(CMD_VOLUME, 5, 0, 0);
+  game.sound.command(CMD_SLIDE, 0, 0, 0);
+  game.sound.command(CMD_ARPEGGIO, sounds[i][3], sounds[i][4], 0);
+  game.sound.command(CMD_INSTRUMENT, sounds[i][0], 0, 0);
+  game.sound.playNote(sounds[i][1], sounds[i][2], 0);
+
+  //gb.sound.playNote(20, 5, 0);
 }
 
 int main(){
     setup();
+    initSound();
 
 	srand(game.getTime());
 	make_pal();
-    make_plasma(0,0,game.display.width-1,game.display.height-1);
+    make_plasma(0,16,game.display.width-1,game.display.height-1);
     char col=0;
 
-<<<<<<< HEAD
-//    game.display.drawRect(1,1,107,85);
-//    game.display.drawLine(1,1,107,85);
-//    game.display.drawCircle(55,44,20);
-//    game.display.drawChar(8,8,'A',8);
-//    game.display.print("Hello World!");
-
-//    playSound(SOUND_PLAUNCH);
+    playSound(SOUND_PLAUNCH);
 
     int FPS = 0;
     int frameNumber=0;
     long tempTime=game.getTime();
     int myFPS=60;
 
-
-=======
-    game.display.drawRect(1,1,107,85);
-    game.display.drawLine(1,1,107,85);
-    game.display.drawCircle(55,44,20);
-    game.display.drawChar(8,8,'A',8);
->>>>>>> parent of a34588c... added sound?
-
     while (game.isRunning()) {
-        //if(game.update()==true){
+        if(game.update()){
             myPad = updateButtons(myPad);
             UpdatePad(myPad);
 
-<<<<<<< HEAD
             if(_Up[NEW]){ myFPS++; game.setFrameRate(myFPS); }
             if(_Down[NEW]){ myFPS--; game.setFrameRate(myFPS); }
 
-            //game.display.clear();
             game.display.setCursor(0,0);
             game.display.setColor(col);
             game.display.setInvisibleColor(0);
@@ -232,34 +248,23 @@ int main(){
             game.display.print(FPS);
             game.display.print(" FPS ");
 
-            //game.display.directChar(0,0,'A');
-
-        frameNumber++;
-        if(game.getTime()-tempTime>1000){
-            tempTime=game.getTime();
-            FPS=frameNumber-1;
-            frameNumber=0;
-        }
-
+            frameNumber++;
+            if(game.getTime()-tempTime>1000){
+                tempTime=game.getTime();
+                FPS=frameNumber-1;
+                frameNumber=0;
+            }
 
             if(_A[NEW]){
                 playSound(SOUND_PLAUNCH);
-                make_plasma(0,0,game.display.width-1,game.display.height-1);
+                make_plasma(0,16,game.display.width-1,game.display.height-1);
             }
             //print(0, 0, "Mode13 Test",0,col++);
-            //game.display.rotatePalette(1);
-            col++;
-            if(col>255)col=255-col;
-=======
-            if(_A[NEW]){make_plasma();}
-            //print(0, 0, "Mode13 Test",0,col++);
-            game.display.print("Hello World!");
+            //game.display.print("Hello World!");
             game.display.rotatePalette(16);
->>>>>>> parent of a34588c... added sound?
-            game.display.update();
-
-    //}
-
+        //    game.display.update();
+        }
     }
+
     return 1;
 }
