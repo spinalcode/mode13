@@ -143,6 +143,7 @@ private:
     static uint8_t bpp;
     static uint8_t m_colordepth;
 public:
+    static uint8_t palOffset;
     static uint8_t width;
     static uint8_t height;
     static uint8_t screenbuffer[];
@@ -224,7 +225,7 @@ public:
     /** rotate palette by step */
     static void rotatePalette(int8_t);
     /** tween between two palettes **/
-    static void tweenPalette(uint16_t*, const uint16_t*, const uint16_t*, uint8_t);
+    static void tweenPalette(uint16_t*, const uint16_t*, const uint16_t*, uint8_t=0);
 
     // DIRECT DRAWING (NO BUFFERING)
     /** Direct pixel (not through display buffer) */

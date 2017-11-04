@@ -4495,7 +4495,7 @@
 1509354316 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_settings.h
 	"My_settings.h"
 
-1509616768 c:\users\spinal\documents\github\mode13\my_settings.h
+1509726656 c:\users\spinal\documents\github\mode13\my_settings.h
 
 1509285510 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\fonts\donut7x10.cpp
 	"PokittoFonts.h"
@@ -4607,7 +4607,7 @@
 	"HWLCD.h"
 	"HWSound.h"
 
-1509367869 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwlcd.h
+1509728098 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwlcd.h
 	"mbed.h"
 	"gpio_api.h"
 	"pinmap.h"
@@ -4619,7 +4619,7 @@
 1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittobuttons.cpp
 	"PokittoCore.h"
 
-1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittocore.h
+1509725222 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittocore.h
 	<stdint.h>
 	<math.h>
 	"pwmout_api.h"
@@ -4653,7 +4653,7 @@
 	"HWButtons.h"
 	"PokittoSimulator.h"
 
-1509347295 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisplay.h
+1509728366 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisplay.h
 	<stdint.h>
 	"Pokitto_settings.h"
 	"PokittoGlobs.h"
@@ -4687,7 +4687,7 @@
 	"PokittoFonts.h"
 	"PokittoDisplay.h"
 
-1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittocore.cpp
+1509796820 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittocore.cpp
 	"PokittoCore.h"
 	"Pokitto_settings.h"
 	"PokittoConsole.h"
@@ -4738,7 +4738,7 @@
 
 1509616548 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_libs\synth\synth_song.h
 
-1509440356 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisplay.cpp
+1509728326 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_core\pokittodisplay.cpp
 	"PokittoDisplay.h"
 	"Pokitto_settings.h"
 	"GBcompatibility.h"
@@ -4781,7 +4781,7 @@
 	"PokittoSound.h"
 	"PokittoDisplay.h"
 
-1509531460 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwlcd.cpp
+1509797153 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\hwlcd.cpp
 	"HWLCD.h"
 	"Pokitto_settings.h"
 
@@ -4807,7 +4807,7 @@
 1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokitto_extport.cpp
 	"Pokitto.h"
 
-1509616548 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokittoclock.cpp
+1509797153 source:c:\users\spinal\documents\github\mode13\pokittolib\pokitto_hw\pokittoclock.cpp
 	"PokittoCore.h"
 	"pinmap.h"
 	"HWLCD.h"
@@ -4876,7 +4876,7 @@
 1509285510 c:\users\spinal\documents\github\mode13\pokittolib\pokitto_xternals\arduino\pins_arduino.h
 	"PokittoFakeavr.h"
 
-1509616881 source:c:\users\spinal\documents\github\mode13\main.cpp
+1509796981 source:c:\users\spinal\documents\github\mode13\main.cpp
 	"Pokitto.h"
 	"gfx.h"
 	"music.h"

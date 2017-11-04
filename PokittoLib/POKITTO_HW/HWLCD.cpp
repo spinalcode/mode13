@@ -381,7 +381,7 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
 }
 
 
-void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr) {
+void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t palOffset = 0) {
 
     int savet;
     uint16_t wdata;
@@ -393,25 +393,25 @@ void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr) {
     for(int y=0; y <110; y++){
         savet = t;
         for(int x=0; x < 87; x+=8){
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
         }
         t = savet;
         for(int x=0; x < 87; x+=8){
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scrbuf[t++]+palOffset]; write_data(wdata); write_data(wdata);
         }
     }
 }

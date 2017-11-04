@@ -154,16 +154,21 @@ void SubDivide (int x1, int y1, int x2, int y2){
 	SubDivide(x, y1, x2, y);
 	SubDivide(x1, y, x, y2);
 }
-void make_plasma(void){
+void make_plasma(int x1=0,int y1=0,int x2=game.display.width-1,int y2=game.display.height-1){
 	int i=0;
 	for(i=0; i<game.display.width*game.display.height; i++)	{
 		game.display.screenbuffer[i]=0;
 	}
-	Dot(0, 0, RandMinMax(0,255) + 1);
-	Dot(game.display.width-1, 0, RandMinMax(0,255) + 1);
-	Dot(game.display.width-1, game.display.height-1, RandMinMax(0,255) + 1);
-	Dot(0, game.display.height-1, RandMinMax(0,255) + 1);
-	SubDivide(0, 0, game.display.width-1, game.display.height-1);
+	if(x1<0)x1=0;
+	if(y1<0)y1=0;
+	if(x2>game.display.width-1)x2=game.display.width-1;
+	if(y2>game.display.height-1)y2=game.display.height-1;
+
+	Dot(x1, y1, RandMinMax(0,255) + 1);
+	Dot(x2, y1, RandMinMax(0,255) + 1);
+	Dot(x2, y2, RandMinMax(0,255) + 1);
+	Dot(x1, y2, RandMinMax(0,255) + 1);
+	SubDivide(x1, y1, x2, y2);
 }
 void make_pal(void){
 	int a,s,r,g,b;
@@ -183,6 +188,7 @@ void setup(){
     game.display.width = 110; // half size
     game.display.height = 88;
     game.display.persistence=1;
+    game.setFrameRate(60);
 }
 
 
@@ -216,32 +222,63 @@ int main(){
 
 	srand(game.getTime());
 	make_pal();
-    make_plasma();
+    make_plasma(0,0,game.display.width-1,game.display.height-1);
     char col=0;
 
-    game.display.drawRect(1,1,107,85);
-    game.display.drawLine(1,1,107,85);
-    game.display.drawCircle(55,44,20);
-    game.display.drawChar(8,8,'A',8);
-    game.display.print("Hello World!");
+//    game.display.drawRect(1,1,107,85);
+//    game.display.drawLine(1,1,107,85);
+//    game.display.drawCircle(55,44,20);
+//    game.display.drawChar(8,8,'A',8);
+//    game.display.print("Hello World!");
 
-        playSound(SOUND_PLAUNCH);
+//    playSound(SOUND_PLAUNCH);
+
+    int FPS = 0;
+    int frameNumber=0;
+    long tempTime=game.getTime();
+    int myFPS=60;
+
+
 
     while (game.isRunning()) {
-        //if(game.update()){
+        //if(game.update()==true){
             myPad = updateButtons(myPad);
             UpdatePad(myPad);
 
+            if(_Up[NEW]){ myFPS++; game.setFrameRate(myFPS); }
+            if(_Down[NEW]){ myFPS--; game.setFrameRate(myFPS); }
+
+            //game.display.clear();
+            game.display.setCursor(0,0);
+            game.display.setColor(col);
+            game.display.setInvisibleColor(0);
+            game.display.print(myFPS);
+            game.display.setCursor(0,8);
+            game.display.print(FPS);
+            game.display.print(" FPS ");
+
+            //game.display.directChar(0,0,'A');
+
+        frameNumber++;
+        if(game.getTime()-tempTime>1000){
+            tempTime=game.getTime();
+            FPS=frameNumber-1;
+            frameNumber=0;
+        }
+
+
             if(_A[NEW]){
                 playSound(SOUND_PLAUNCH);
-                make_plasma();
+                make_plasma(0,0,game.display.width-1,game.display.height-1);
             }
             //print(0, 0, "Mode13 Test",0,col++);
-            //game.display.print("Hello World!");
-            game.display.rotatePalette(16);
+            //game.display.rotatePalette(1);
+            col++;
+            if(col>255)col=255-col;
             game.display.update();
-        //}
-    }
 
+    //}
+
+    }
     return 1;
 }
