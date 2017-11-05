@@ -117,10 +117,10 @@ unsigned char* ReadBMP(char* filename){
 
 unsigned short pal[256];
 int PntClr(int x, int y){
-	return game.display.screenbuffer[y*game.display.width+x];
+	return game.display.getPixel(x,y);
 }
 void Dot (int x, int y, int c){
-	game.display.screenbuffer[y*game.display.width+x]=c;
+	game.display.drawPixel(x,y,c);
 }
 int RandMinMax(int min, int max){
     return rand() % max + min;
@@ -155,6 +155,7 @@ void SubDivide (int x1, int y1, int x2, int y2){
 	SubDivide(x1, y, x, y2);
 }
 void make_plasma(int x1=0,int y1=0,int x2=game.display.width-1,int y2=game.display.height-1){
+	game.display.clear();
 	if(x1<0)x1=0;
 	if(y1<0)y1=0;
 	if(x2>game.display.width-1)x2=game.display.width-1;
@@ -218,7 +219,7 @@ int main(){
 
 	srand(game.getTime());
 	make_pal();
-    make_plasma(0,16,game.display.width-1,game.display.height-1);
+    make_plasma(0,8,game.display.width-1,game.display.height-1);
     char col=0;
 
     playSound(SOUND_PLAUNCH);
@@ -230,6 +231,9 @@ int main(){
     game.setFrameRate(myFPS);
     char tempText[10];
 
+    game.display.setFont(font3x5);
+    //game.display.drawRect(1,1,107,85);
+
     while (game.isRunning()) {
         if(game.update()){
             myPad = updateButtons(myPad);
@@ -239,10 +243,10 @@ int main(){
             if(_Down[NEW]){ myFPS--; game.setFrameRate(myFPS); }
 
             game.display.setCursor(0,0);
-            game.display.setColor(col--); if(col<0)col=255;
+            game.display.setColor(col+=2); if(col>255)col=col-255;
             game.display.setInvisibleColor(-1);
             game.display.print(myFPS);
-            game.display.setCursor(0,8);
+            game.display.setCursor(32,0);
             game.display.print(FPS);
 
             frameNumber++;
@@ -256,11 +260,11 @@ int main(){
 
             if(_A[NEW]){
                 playSound(SOUND_PLAUNCH);
-                make_plasma(0,16,game.display.width-1,game.display.height-1);
+                make_plasma(0,8,game.display.width-1,game.display.height-1);
             }
-            game.display.palOffset = 255-col;
+            game.display.palOffset = col;
             //game.display.rotatePalette(1);
-            //game.display.update();
+        //    game.display.update();
 
         }
     }
