@@ -382,42 +382,47 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
 
 
 void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
+uint16_t x,y;
+uint16_t scanline[88]; // read two nibbles = pixels at a time
+uint8_t *d;
 
-    uint16_t wdata;
-    write_command(0x20); write_data(0); // x
-    write_command(0x21); write_data(0); // y
-    write_command(0x22); // pixel data mode
+write_command(0x20); write_data(0);  // 0
+write_command(0x21); write_data(0);
+write_command(0x22);
+CLR_CS_SET_CD_RD_WR;
 
-    uint8_t scanline[88];
-
-    int t=0;
-    for(int y=0; y <110; y++){
-
-        for(int x=0; x < 88; x++){
-            scanline[x]=(scrbuf[t++]+offset)&255;
-        }
-
-        for(int x=0; x < 88;){
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-        }
-        for(int x=0; x < 88;){
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
-        }
+for(x=0;x<110;x++)
+  {
+    d = scrbuf+x;// point to beginning of line in data
+    uint8_t s=0;
+    for(y=0;y<88;y++)
+    {
+        uint8_t t = *d; // higher nibble
+        scanline[s++] = (paletteptr[(t+offset)&255]);
+        d+=110; // jump to read byte directly below in screenbuffer
     }
+    s=0;
+    for (s=0;s<88;) {
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+    for (s=0;s<88;) {
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+        setup_data_16(scanline[s++]);CLR_WR;SET_WR;CLR_WR;SET_WR;
+    }
+  }
 
 }
 

@@ -117,10 +117,10 @@ unsigned char* ReadBMP(char* filename){
 
 unsigned short pal[256];
 int PntClr(int x, int y){
-	return game.display.screenbuffer[x*game.display.height+y];
+	return game.display.screenbuffer[y*game.display.width+x];
 }
 void Dot (int x, int y, int c){
-	game.display.screenbuffer[x*game.display.height+y]=c;
+	game.display.screenbuffer[y*game.display.width+x]=c;
 }
 int RandMinMax(int min, int max){
     return rand() % max + min;
@@ -155,10 +155,6 @@ void SubDivide (int x1, int y1, int x2, int y2){
 	SubDivide(x1, y, x, y2);
 }
 void make_plasma(int x1=0,int y1=0,int x2=game.display.width-1,int y2=game.display.height-1){
-	int i=0;
-	for(i=0; i<game.display.width*game.display.height; i++)	{
-		game.display.screenbuffer[i]=0;
-	}
 	if(x1<0)x1=0;
 	if(y1<0)y1=0;
 	if(x2>game.display.width-1)x2=game.display.width-1;
@@ -235,7 +231,7 @@ int main(){
     char tempText[10];
 
     while (game.isRunning()) {
-        //if(game.update()){
+        if(game.update()){
             myPad = updateButtons(myPad);
             UpdatePad(myPad);
 
@@ -264,9 +260,9 @@ int main(){
             }
             game.display.palOffset = 255-col;
             //game.display.rotatePalette(1);
-            game.display.update();
+            //game.display.update();
 
-        //}
+        }
     }
 
     return 1;
