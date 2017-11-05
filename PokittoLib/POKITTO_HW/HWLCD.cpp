@@ -98,13 +98,13 @@ inline void write_command_16(uint16_t data)
 /**************************************************************************/
 inline void write_data_16(uint16_t data)
 {
-   //CLR_CS;
+   CLR_CS;
    SET_CD;
    SET_RD;
    setup_data_16(data);
    CLR_WR;
    SET_WR;
-   //SET_CS;
+   SET_CS;
 }
 
 /**************************************************************************/
@@ -383,23 +383,42 @@ void Pokitto::lcdRectangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint1
 
 void Pokitto::lcdRefreshMode13(uint8_t * scrbuf, uint16_t* paletteptr, uint8_t offset){
 
-    int savet;
     uint16_t wdata;
     write_command(0x20); write_data(0); // x
     write_command(0x21); write_data(0); // y
     write_command(0x22); // pixel data mode
 
+    uint8_t scanline[88];
+
     int t=0;
     for(int y=0; y <110; y++){
-        savet = t;
+
         for(int x=0; x < 88; x++){
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+            scanline[x]=(scrbuf[t++]+offset)&255;
         }
-        t = savet;
-        for(int x=0; x < 88; x++){
-            wdata = paletteptr[scrbuf[t++]]; write_data(wdata); write_data(wdata);
+
+        for(int x=0; x < 88;){
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+        }
+        for(int x=0; x < 88;){
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
+            wdata = paletteptr[scanline[x++]]; write_data(wdata); write_data(wdata);
         }
     }
+
 }
 
 void Pokitto::lcdRefreshMode1(uint8_t * scrbuf, uint16_t* paletteptr) {

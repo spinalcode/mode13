@@ -235,7 +235,7 @@ int main(){
     char tempText[10];
 
     while (game.isRunning()) {
-        if(game.update()){
+        //if(game.update()){
             myPad = updateButtons(myPad);
             UpdatePad(myPad);
 
@@ -246,18 +246,13 @@ int main(){
             game.display.setColor(col--); if(col<0)col=255;
             game.display.setInvisibleColor(-1);
             game.display.print(myFPS);
-            game.display.print(" ");
             game.display.setCursor(0,8);
             game.display.print(FPS);
-            game.display.print(" ");
-            //game.display.setCursor(32,0);
-            //sprintf(tempText,"%d  ",game.timePerFrame);
-            //game.display.print(tempText);
-            //game.display.print(" ");
 
             frameNumber++;
-            if(game.getTime()-tempTime>1000){
-                tempTime=game.getTime();
+            unsigned long currentTicks = game.getTime();
+            if(currentTicks-tempTime>1000){
+                tempTime=currentTicks;
                 FPS=frameNumber-1;
 
                 frameNumber=0;
@@ -267,11 +262,11 @@ int main(){
                 playSound(SOUND_PLAUNCH);
                 make_plasma(0,16,game.display.width-1,game.display.height-1);
             }
-
+            game.display.palOffset = 255-col;
             //game.display.rotatePalette(1);
-            //game.display.update();
+            game.display.update();
 
-        }
+        //}
     }
 
     return 1;
