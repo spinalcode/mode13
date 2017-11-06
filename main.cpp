@@ -227,7 +227,7 @@ int main(){
     int FPS = 0;
     int frameNumber=0;
     long tempTime=game.getTime();
-    int myFPS=20;
+    int myFPS=30;
     game.setFrameRate(myFPS);
     char tempText[10];
 
